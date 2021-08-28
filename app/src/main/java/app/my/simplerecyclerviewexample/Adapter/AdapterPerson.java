@@ -1,6 +1,7 @@
 package app.my.simplerecyclerviewexample.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import app.my.simplerecyclerviewexample.Activity.PersonDetailsActivity;
 import app.my.simplerecyclerviewexample.Model.Item;
 import app.my.simplerecyclerviewexample.R;
 
 public class AdapterPerson extends RecyclerView.Adapter<AdapterPerson.PersonViewHolder> {
 
-    private Context context;
-    private List<Item> itemList;
+    private final Context context;
+    private final List<Item> itemList;
 
     public AdapterPerson(Context context, List<Item> itemList) {
         this.context = context;
@@ -57,6 +59,17 @@ public class AdapterPerson extends RecyclerView.Adapter<AdapterPerson.PersonView
 
             ivPicture = itemView.findViewById(R.id.ivPicture);
             tvName = itemView.findViewById(R.id.tvName);
+            
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Item item = itemList.get(getAdapterPosition());
+                    Intent intent = new Intent(context, PersonDetailsActivity.class);
+                    intent.putExtra("name", item.getName());
+                    intent.putExtra("picture", item.getPicture());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

@@ -1,10 +1,10 @@
 package app.my.simplerecyclerviewexample.Activity;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
