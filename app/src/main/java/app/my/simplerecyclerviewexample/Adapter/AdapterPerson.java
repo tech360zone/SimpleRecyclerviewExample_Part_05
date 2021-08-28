@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import app.my.simplerecyclerviewexample.Activity.PersonDetailsActivity;
+import app.my.simplerecyclerviewexample.Activity.DetailsActivity;
 import app.my.simplerecyclerviewexample.Model.Item;
 import app.my.simplerecyclerviewexample.R;
 
@@ -59,12 +59,12 @@ public class AdapterPerson extends RecyclerView.Adapter<AdapterPerson.PersonView
 
             ivPicture = itemView.findViewById(R.id.ivPicture);
             tvName = itemView.findViewById(R.id.tvName);
-            
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Item item = itemList.get(getAdapterPosition());
-                    Intent intent = new Intent(context, PersonDetailsActivity.class);
+                    Intent intent = new Intent(context, DetailsActivity.class);
                     intent.putExtra("name", item.getName());
                     intent.putExtra("picture", item.getPicture());
                     context.startActivity(intent);
