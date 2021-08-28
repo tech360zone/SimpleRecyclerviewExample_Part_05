@@ -5,17 +5,17 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
 
-import app.my.simplerecyclerviewexample.databinding.ActivityPersonDetailsBinding;
+import app.my.simplerecyclerviewexample.databinding.ActivityDetailsBinding;
 
-public class PersonDetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity {
 
-    private ActivityPersonDetailsBinding binding;
+    private ActivityDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        binding = ActivityPersonDetailsBinding.inflate(getLayoutInflater());
+        binding = ActivityDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         if (getSupportActionBar() != null) {
@@ -27,8 +27,8 @@ public class PersonDetailsActivity extends AppCompatActivity {
             String name = bundle.getString("name");
             int picture = bundle.getInt("picture");
 
-            binding.tvDname.setText(name);
-            binding.ivDpicture.setImageResource(picture);
+            binding.tvDName.setText(name);
+            binding.ivDPicture.setImageResource(picture);
         }
     }
 
