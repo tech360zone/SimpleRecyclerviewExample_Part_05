@@ -11,11 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import app.my.simplerecyclerviewexample.Activity.DetailsActivity;
+import app.my.simplerecyclerviewexample.Activity.DetailActivity;
+import app.my.simplerecyclerviewexample.Interface.RvItemClick;
 import app.my.simplerecyclerviewexample.Model.Item;
 import app.my.simplerecyclerviewexample.R;
 
@@ -23,10 +26,12 @@ public class AdapterPerson extends RecyclerView.Adapter<AdapterPerson.PersonView
 
     private final Context context;
     private final List<Item> itemList;
+    private RvItemClick rvItemClick;
 
-    public AdapterPerson(Context context, List<Item> itemList) {
+    public AdapterPerson(Context context, List<Item> itemList, RvItemClick rvItemClick) {
         this.context = context;
         this.itemList = itemList;
+        this.rvItemClick = rvItemClick;
     }
 
     @NonNull
@@ -39,9 +44,7 @@ public class AdapterPerson extends RecyclerView.Adapter<AdapterPerson.PersonView
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull AdapterPerson.PersonViewHolder holder, int position) {
-        Item item = itemList.get(position);
-        holder.tvName.setText(item.getName());
-        holder.ivPicture.setImageResource(item.getPicture());
+        ((PersonViewHolder) holder).bindData(itemList.get(position));
     }
 
     @Override
@@ -63,13 +66,14 @@ public class AdapterPerson extends RecyclerView.Adapter<AdapterPerson.PersonView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Item item = itemList.get(getAdapterPosition());
-                    Intent intent = new Intent(context, DetailsActivity.class);
-                    intent.putExtra("name", item.getName());
-                    intent.putExtra("picture", item.getPicture());
-                    context.startActivity(intent);
+                    rvItemClick.onClickItem(itemList.get(getAdapterPosition()));
                 }
             });
+        }
+
+        public void bindData(Item item) {
+            tvName.setText(item.getName());
+            Glide.with(context).load(item.getPicture()).into(ivPicture);
         }
     }
 }

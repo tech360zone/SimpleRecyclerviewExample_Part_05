@@ -2,10 +2,9 @@ package app.my.simplerecyclerviewexample.Model;
 
 public class Item {
 
-    private String name;
-    private int picture;
+    private String name, picture;
 
-    public Item(String name, int picture) {
+    public Item(String name, String picture) {
         this.name = name;
         this.picture = picture;
     }
@@ -18,11 +17,11 @@ public class Item {
         this.name = name;
     }
 
-    public int getPicture() {
+    public String getPicture() {
         return picture;
     }
 
-    public void setPicture(int picture) {
+    public void setPicture(String picture) {
         this.picture = picture;
     }
 }
