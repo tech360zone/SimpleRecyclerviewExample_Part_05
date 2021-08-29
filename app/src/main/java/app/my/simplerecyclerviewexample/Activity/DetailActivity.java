@@ -5,17 +5,19 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
 
-import app.my.simplerecyclerviewexample.databinding.ActivityDetailsBinding;
+import com.bumptech.glide.Glide;
 
-public class DetailsActivity extends AppCompatActivity {
+import app.my.simplerecyclerviewexample.databinding.ActivityDetailBinding;
 
-    private ActivityDetailsBinding binding;
+public class DetailActivity extends AppCompatActivity {
+
+    private ActivityDetailBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        binding = ActivityDetailsBinding.inflate(getLayoutInflater());
+        binding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         if (getSupportActionBar() != null) {
@@ -25,10 +27,10 @@ public class DetailsActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             String name = bundle.getString("name");
-            int picture = bundle.getInt("picture");
+            String picture = bundle.getString("picture");
 
             binding.tvDName.setText(name);
-            binding.ivDPicture.setImageResource(picture);
+            Glide.with(this).load(picture).into(binding.ivDPicture);
         }
     }
 
