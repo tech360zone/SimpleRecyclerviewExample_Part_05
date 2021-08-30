@@ -2,10 +2,18 @@ package app.my.simplerecyclerviewexample.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +21,15 @@ import java.util.List;
 import app.my.simplerecyclerviewexample.Adapter.AdapterPerson;
 import app.my.simplerecyclerviewexample.Interface.RvItemClick;
 import app.my.simplerecyclerviewexample.Model.Item;
+import app.my.simplerecyclerviewexample.R;
 import app.my.simplerecyclerviewexample.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements RvItemClick {
 
     private ActivityMainBinding binding;
     private List<Item> itemList;
+    private AdapterPerson adapter;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,62 +39,104 @@ public class MainActivity extends AppCompatActivity implements RvItemClick {
         setContentView(binding.getRoot());
 
         itemList = new ArrayList<>();
+        handler = new Handler();
 
-        Item item1 = new Item(
-                "Elon Musk",
-                "https://cdn.pixabay.com/photo/2021/08/23/08/28/path-6567149_960_720.jpg");
-        itemList.add(item1);
-
-        Item item2 = new Item(
-                "Jeff Bezos",
-                "https://cdn.pixabay.com/photo/2021/06/05/13/10/kid-6312635_960_720.jpg");
-        itemList.add(item2);
-
-        Item item3 = new Item(
-                "Mukesh Ambani",
-                "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg");
-        itemList.add(item3);
-
-        Item item4 = new Item(
-                "Ratan Tata",
-                "https://cdn.pixabay.com/photo/2021/08/25/07/23/nature-6572635_960_720.jpg");
-        itemList.add(item4);
-
-        Item item5 = new Item(
-                "Bill Gates",
-                "https://cdn.pixabay.com/photo/2021/07/30/17/58/dragonfly-6510395_960_720.jpg");
-        itemList.add(item5);
-
-        Item item6 = new Item(
-                "Mark Zuckerberg",
-                "https://cdn.pixabay.com/photo/2021/07/30/17/58/dragonfly-6510395_960_720.jpg");
-        itemList.add(item6);
-
-        Item item7 = new Item(
-                "Alia Bhatt",
-                "https://cdn.pixabay.com/photo/2021/08/20/03/57/boy-6559419_960_720.jpg");
-        itemList.add(item7);
-
-        Item item8 = new Item(
-                "Anushka Sharma",
-                "https://cdn.pixabay.com/photo/2021/08/04/13/06/software-developer-6521720_960_720.jpg");
-        itemList.add(item8);
-
-        Item item9 = new Item(
-                "Katrina Kaiff",
-                "https://cdn.pixabay.com/photo/2020/09/02/18/33/portland-head-light-5539153_960_720.jpg");
-        itemList.add(item9);
-
-        Item item10 = new Item(
-                "Shraddha Kapoor",
-                "https://cdn.pixabay.com/photo/2021/08/24/01/44/cat-6569156_960_720.jpg");
-        itemList.add(item10);
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Tech360Zone", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
+        itemList.add(new Item("Elon Mask", "https://cdn.pixabay.com/photo/2021/08/01/12/58/beach-6514331_960_720.jpg"));
 
         binding.rvMain.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         binding.rvMain.setLayoutManager(linearLayoutManager);
-        AdapterPerson adapter = new AdapterPerson(this, itemList, this);
+        adapter = new AdapterPerson(this, itemList, this);
         binding.rvMain.setAdapter(adapter);
+
+        binding.rvMain.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            binding.ivTopBtn.setVisibility(View.GONE);
+                        }
+                    }, 3000);
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0) {
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            binding.ivTopBtn.setVisibility(View.GONE);
+                        }
+                    }, 3000);
+                } else if (dy < 0) {
+                    binding.ivTopBtn.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        binding.ivTopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.rvMain.smoothScrollToPosition(0);
+            }
+        });
     }
 
     @Override
@@ -92,5 +145,18 @@ public class MainActivity extends AppCompatActivity implements RvItemClick {
         intent.putExtra("name", item.getName());
         intent.putExtra("picture", item.getPicture());
         startActivity(intent);
+    }
+
+    @Override
+    public void onRvMenuItem(int position, MenuItem menuItem, Item item) {
+        switch (menuItem.getItemId()) {
+            case R.id.edit:
+                Toast.makeText(this, item.getName(), Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.delete:
+                itemList.remove(position);
+                adapter.notifyItemRemoved(position);
+                break;
+        }
     }
 }

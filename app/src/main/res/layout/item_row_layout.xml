@@ -12,8 +12,7 @@
         android:layout_height="80dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/jeff_bezos" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvName"
@@ -23,6 +22,19 @@
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
+        app:layout_constraintEnd_toStartOf="@+id/ivMenu"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivPicture"
         app:layout_constraintTop_toTopOf="@+id/ivPicture" />
+
+    <ImageView
+        android:id="@+id/ivMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivPicture"
+        app:srcCompat="@drawable/ic_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
