@@ -2,4 +2,7 @@
     <string name="app_name">SimpleRecyclerviewExample</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="linearLayout">LinearLayout</string>
+    <string name="gridLayout">GridLayout</string>
+    <string name="staggeredLayout">StaggeredLayout</string>
 </resources>
